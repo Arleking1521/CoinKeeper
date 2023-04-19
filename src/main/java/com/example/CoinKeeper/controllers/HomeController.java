@@ -50,18 +50,18 @@ public class HomeController {
         return "redirect:/add-income";
     }
 
-    @GetMapping("player-delete/{id}")
+    @GetMapping("income-delete/{id}")
     public String deletePlayer(@PathVariable("id") Long id){
         incomeService.deleteById(id);
-        return "redirect:/players";
+        return "redirect:/";
     }
 
 
-    @GetMapping("/player-update/{id}")
+    @GetMapping("/income-update/{id}")
     public String updateCarForm(@PathVariable("id") Long id, Model model){
         Income player = incomeService.findById(id);
         model.addAttribute("player", player);
-        return "player-update";
+        return "income-update";
     }
 
     @PostMapping("/player-update")
