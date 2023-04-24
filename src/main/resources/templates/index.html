@@ -20,7 +20,7 @@
 <main>
     <img src="img/back.png"   alt="" srcset="" class="back">
     <div class="form">
-        <form action="" method="get">
+        <form action="" method="post">
                 <span class="form_el">
                     <span>ИЗ</span>
                     <select name="" id="" class="label">
@@ -57,28 +57,22 @@
                 <div class="title">
                     <h2>ДОХОДЫ</h2>
                     <span class="info">
-                            <span class="info1">
-                                <p>15000тг</p>
-                                <p>получено</p>
-                            </span>
-                            <span class="info2">
-                                <p>1200000тг</p>
-                                <p>бюджет доходов</p>
-                            </span>
+                        <span class="info1">
+                            <p>15000тг</p>
+                            <p>получено</p>
                         </span>
+                        <span class="info2">
+                            <p>1200000тг</p>
+                            <p>бюджет доходов</p>
+                        </span>
+                    </span>
                 </div>
                 <div class="cards">
-                    <div class="card">
-                        <p class="nazv">Работа</p>
-                        <button class="img">💸</button>
-                        <p class="price str">50000тг</p>
-                        <p class="price">200000</p>
-                    </div>
-                    <div class="card">
-                        <p class="nazv">Бизнес</p>
-                        <button class="img">💎</button>
-                        <p class="price str">100000тг</p>
-                        <p class="price">1000000</p>
+                    <div class="card" th:each="inc : ${income}">
+                        <p class="nazv" th:text="${inc.name}"></p>
+                        <button class="img" th:text="${inc.images.image}"></button>
+                        <p class="price str" th:text="${inc.balance}"></p>
+                        <p class="price" th:text="${inc.plans}"></p>
                     </div>
                 </div>
             </div>
