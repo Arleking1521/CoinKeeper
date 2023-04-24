@@ -1,8 +1,10 @@
 package com.example.CoinKeeper.controllers;
 
+import com.example.CoinKeeper.models.Images;
 import com.example.CoinKeeper.models.Income;
 import com.example.CoinKeeper.models.Accounts;
 import com.example.CoinKeeper.models.Expenses;
+import com.example.CoinKeeper.services.ImagesService;
 import com.example.CoinKeeper.services.IncomeService;
 import com.example.CoinKeeper.services.AccountsService;
 import com.example.CoinKeeper.services.ExpensesService;
@@ -22,10 +24,13 @@ public class HomeController {
     private final IncomeService incomeService;
     private final ExpensesService expensesService;
     private final AccountsService accountsService;
-    public HomeController(IncomeService incomeService, ExpensesService expensesService, AccountsService accountsService) {
+    private final ImagesService imagesService;
+
+    public HomeController(IncomeService incomeService, ExpensesService expensesService, AccountsService accountsService, ImagesService imagesService) {
         this.incomeService = incomeService;
         this.expensesService = expensesService;
         this.accountsService = accountsService;
+        this.imagesService = imagesService;
     }
 
     @GetMapping("/")
@@ -64,13 +69,17 @@ public class HomeController {
 
     @GetMapping("/add-income")
     public String createIncomeForm(Income income, Model model){
-        return "index";
+        List<Images> images = imagesService.findAll();
+        model.addAttribute("image", images);
+        return "add-income";
     }
 
     @PostMapping("/add-income")
-    public String addIncome(Income income, @RequestParam(name = "income_id") Long id){
+    public String addIncome(Income income, @RequestParam(name = "img_id")Long id){
+        Images image = imagesService.findById(id);
+        income.setImages(image);
         incomeService.saveIncomes(income);
-        return "redirect:/add-income";
+        return "redirect:/";
     }
 
     @GetMapping("income-delete/{id}")

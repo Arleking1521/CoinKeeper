@@ -277,6 +277,25 @@ form button:hover{
     flex-direction: column;
     align-items: center;
     margin: 20px 0 30px 0;
+    text-decoration: none;
+    justify-content: center;
+}
+
+.card h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid gray;
+    color: gray;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    transition: 0.3s;
+}
+
+.card h1:hover{
+    border: 2px solid black;
+    color: black;
 }
 
 .price{
