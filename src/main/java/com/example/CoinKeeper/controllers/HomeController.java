@@ -33,6 +33,11 @@ public class HomeController {
         List<Income> income = incomeService.findAll();
         List<Expenses> expenses = expensesService.findAll();
         List<Accounts> accounts = accountsService.findAll();
+        var balance1 = 0;
+        for (int i = 0; i < income.size(); i++) {
+            balance1 += (income.get(i).getBalance());
+        }
+        model.addAttribute("sum_balance1", balance1);
         model.addAttribute("income", income);
         model.addAttribute("expenses", expenses);
         model.addAttribute("accounts", accounts);
