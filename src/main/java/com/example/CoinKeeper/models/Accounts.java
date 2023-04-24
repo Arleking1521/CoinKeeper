@@ -19,7 +19,7 @@ public class Accounts {
     private String name;
 
     @Column(name = "balance")
-    private int balance;
+    private Integer balance;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Images images;

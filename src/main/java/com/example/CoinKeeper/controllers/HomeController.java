@@ -33,11 +33,29 @@ public class HomeController {
         List<Income> income = incomeService.findAll();
         List<Expenses> expenses = expensesService.findAll();
         List<Accounts> accounts = accountsService.findAll();
-        var balance1 = 0;
+        int inc_bal [] = new int[2];
+        int exp_bal [] = new int [2];
+        int acc_bal [] = new int[1];
         for (int i = 0; i < income.size(); i++) {
-            balance1 += (income.get(i).getBalance());
+            if(income.get(i).getPlans() != null){
+                inc_bal[1] += (income.get(i).getPlans());
+            }
+            inc_bal[0] += (income.get(i).getBalance());
         }
-        model.addAttribute("sum_balance1", balance1);
+        for (int i = 0; i < expenses.size(); i++) {
+            if(expenses.get(i).getPlans() != null){
+                exp_bal[1] += (expenses.get(i).getPlans());
+            }
+            exp_bal[0] += (expenses.get(i).getBalance());
+        }
+        for (int i = 0; i < accounts.size(); i++) {
+            acc_bal[0] += (accounts.get(i).getBalance());
+        }
+        model.addAttribute("inc_bal1", inc_bal[0]);
+        model.addAttribute("inc_bal2", inc_bal[1]);
+        model.addAttribute("exp_bal1", exp_bal[0]);
+        model.addAttribute("exp_bal2", exp_bal[1]);
+        model.addAttribute("acc_bal", acc_bal[0]);
         model.addAttribute("income", income);
         model.addAttribute("expenses", expenses);
         model.addAttribute("accounts", accounts);

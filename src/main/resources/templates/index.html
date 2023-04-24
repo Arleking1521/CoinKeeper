@@ -58,11 +58,11 @@
                     <h2>ДОХОДЫ</h2>
                     <span class="info">
                         <span class="info1">
-                            <p th:text="${sum_balance1}"></p>
+                            <p th:text="${inc_bal1} + ' тг'"></p>
                             <p>получено</p>
                         </span>
                         <span class="info2">
-                            <p>1200000тг</p>
+                            <p th:text="${inc_bal2} + ' тг'"></p>
                             <p>бюджет доходов</p>
                         </span>
                     </span>
@@ -81,7 +81,7 @@
                     <h2>СЧЕТА</h2>
                     <span class="info pl">
                             <span class="info2 plus">
-                                <p>1200000тг</p>
+                                <p th:text="${acc_bal} + ' тг'"></p>
                                 <p>в наличии</p>
                             </span>
                         </span>
@@ -99,11 +99,11 @@
                     <h2>РАСХОДЫ</h2>
                     <span class="info">
                             <span class="info1">
-                                <p>15000тг</p>
+                                <p th:text="${exp_bal1} + ' тг'"></p>
                                 <p>потрачено</p>
                             </span>
                             <span class="info2">
-                                <p>1200000тг</p>
+                                <p th:text="${exp_bal2} + ' тг'"></p>
                                 <p>в планах</p>
                             </span>
                         </span>
@@ -113,7 +113,7 @@
                         <p class="nazv" th:text="${exp.name}"></p>
                         <button class="img thr" th:text="${exp.images.image}"></button>
                         <p class="price str third" th:text="${exp.balance}"></p>
-                        <p class="price" th:text="${exp.plans}"></p>
+                        <p class="price" th:unless="${exp.plans == null}" th:text="${exp.plans}"></p>
                     </div>
                 </div>
             </div>

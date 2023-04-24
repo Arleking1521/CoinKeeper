@@ -19,10 +19,10 @@ public class Income {
     private String name;
 
     @Column(name = "balance")
-    private int balance;
+    private Integer balance;
 
     @Column(name = "plans")
-    private int plans;
+    private Integer plans;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Images images;
