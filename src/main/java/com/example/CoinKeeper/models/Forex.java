@@ -9,21 +9,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "accounts")
-public class Accounts {
+@Table(name = "Forex")
+public class Forex {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name="sign")
+    private Character sign;
 
-    @Column(name = "balance")
-    private Integer balance;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Images images;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Forex forex;
+    @Column(name = "ratio")
+    private Float ratio;
 }

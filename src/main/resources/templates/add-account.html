@@ -21,19 +21,17 @@
     <main>
         <img src="img/back.png" alt="" srcset="" class="back">
         <div>
-            <form action="" th:action="@{/add-income}" th:object="${income}" method="post">
-                <span>Источник дохода</span>
+            <form action="" th:action="@{/add-account}" th:object="${accounts}" method="post">
+                <span>Счет</span>
                 <input type="text" th:field="*{name}" required>
-                <span>Получено</span>
+                <span>Сумма</span>
                 <input type="number" th:field="*{balance}" required>
-                <span>В плане</span>
-                <input type="number" th:field="*{plans}">
                 <span>Валюта</span>
                 <select name = "cur_id">
                     <option th:each="cur : ${forex}" th:text="${cur.sign}" th:value="${cur.id}"></option>
                 </select>
                 <span>Иконка</span>
-                <select name = "img_id">
+                <select id="" name = "img_id">
                     <option th:each="img : ${image}" th:text="${img.image}" th:value="${img.id}"></option>
                 </select>
                 <button type="submit">ДОБАВИТЬ</button>

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Currency;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,4 +28,7 @@ public class Income {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Images images;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Forex forex;
 }
