@@ -21,6 +21,6 @@ public class Accounts {
     @Column(name = "balance")
     private int balance;
 
-    @Column(name = "image")
-    private String image;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Images images;
 }

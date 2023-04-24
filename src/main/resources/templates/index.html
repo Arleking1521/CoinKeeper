@@ -87,15 +87,10 @@
                         </span>
                 </div>
                 <div class="cards">
-                    <div class="card">
-                        <p class="nazv">Kaspi</p>
-                        <button class="img sec">💳</button>
-                        <p class="price str second">300000тг</p>
-                    </div>
-                    <div class="card">
-                        <p class="nazv">Halyk</p>
-                        <button class="img sec">🧼</button>
-                        <p class="price str second">1000000тг</p>
+                    <div class="card" th:each="acc : ${accounts}">
+                        <p class="nazv" th:text="${acc.name}"></p>
+                        <button class="img sec" th:text="${acc.images.image}"></button>
+                        <p class="price str second" th:text="${acc.balance}"></p>
                     </div>
                 </div>
             </div>
@@ -114,17 +109,11 @@
                         </span>
                 </div>
                 <div class="cards">
-                    <div class="card">
-                        <p class="nazv">Работа</p>
-                        <button class="img thr">💸</button>
-                        <p class="price str third">50000тг</p>
-                        <p class="price">200000</p>
-                    </div>
-                    <div class="card">
-                        <p class="nazv">Бизнес</p>
-                        <button class="img thr">💎</button>
-                        <p class="price str third">100000тг</p>
-                        <p class="price">1000000</p>
+                    <div class="card" th:each="exp : ${expenses}">
+                        <p class="nazv" th:text="${exp.name}"></p>
+                        <button class="img thr" th:text="${exp.images.image}"></button>
+                        <p class="price str third" th:text="${exp.balance}"></p>
+                        <p class="price" th:text="${exp.plans}"></p>
                     </div>
                 </div>
             </div>

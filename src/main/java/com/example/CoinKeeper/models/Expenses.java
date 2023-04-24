@@ -21,6 +21,9 @@ public class Expenses {
     @Column(name = "balance")
     private int balance;
 
-    @Column(name = "image")
-    private String image;
+    @Column(name = "plans")
+    private int plans;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Images images;
 }
