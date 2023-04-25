@@ -25,9 +25,9 @@
                 <span>Расходы</span>
                 <input type="text" th:field="*{name}" required>
                 <span>Сумма</span>
-                <input type="number" th:field="*{balance}" required>
+                <input type="number" step="0.01" th:field="*{balance}" required>
                 <span>В плане</span>
-                <input type="number" th:field="*{plans}">
+                <input type="number" step="0.01" th:field="*{plans}">
                 <span>Валюта</span>
                 <select name = "cur_id">
                     <option th:each="cur : ${forex}" th:text="${cur.sign}" th:value="${cur.id}"></option>

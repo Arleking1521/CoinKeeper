@@ -21,10 +21,10 @@ public class Expenses {
     private String name;
 
     @Column(name = "balance")
-    private Integer balance;
+    private Float balance;
 
     @Column(name = "plans")
-    private Integer plans;
+    private Float plans;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Images images;

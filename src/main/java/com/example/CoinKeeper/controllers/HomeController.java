@@ -34,9 +34,9 @@ public class HomeController {
         List<Income> income = incomeService.findAll();
         List<Expenses> expenses = expensesService.findAll();
         List<Accounts> accounts = accountsService.findAll();
-        int inc_bal [] = new int[2];
-        int exp_bal [] = new int [2];
-        int acc_bal [] = new int[1];
+        float inc_bal [] = new float[2];
+        float exp_bal [] = new float[2];
+        float acc_bal [] = new float[1];
         for (int i = 0; i < income.size(); i++) {
             if(income.get(i).getPlans() != null){
                 inc_bal[1] += (income.get(i).getPlans() * income.get(i).getForex().getRatio());
