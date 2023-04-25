@@ -402,6 +402,25 @@ form button:hover{
     margin: 5px 0px;
 }
 
+.delete{
+    flex-direction: column;
+    align-items: center;
+}
+
+.del{
+    width: 50%;
+}
+
+.none{
+    opacity: 0;
+}
+
+.hov:after:hover{
+    content: "aaa";
+    background: #2e2e2e;
+}
+
+
 
 @keyframes tab {
     0%{opacity: 0; transform: translate(1000px);}

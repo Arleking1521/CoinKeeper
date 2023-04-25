@@ -71,7 +71,7 @@
                 <div class="cards">
                     <div class="card" th:each="inc : ${income}">
                         <p class="nazv" th:text="${inc.name}"></p>
-                        <button class="img" th:text="${inc.images.image}"></button>
+                        <button class="img" for="ass" th:text="${inc.images.image}"></button>
                         <p class="price str" th:text="${inc.balance} + ${inc.forex.sign}"></p>
                         <p class="price" th:text="${inc.plans}"></p>
                     </div>

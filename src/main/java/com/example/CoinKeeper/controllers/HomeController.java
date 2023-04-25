@@ -63,6 +63,17 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/delete")
+    public String findAllDeletion(Model model){
+        List<Income> income = incomeService.findAll();
+        List<Expenses> expenses = expensesService.findAll();
+        List<Accounts> accounts = accountsService.findAll();
+        model.addAttribute("income", income);
+        model.addAttribute("expenses", expenses);
+        model.addAttribute("accounts", accounts);
+        return "delete";
+    }
+
     @GetMapping("/add-income")
     public String createIncomeForm(Income income, Model model){
         List<Images> images = imagesService.findAll();

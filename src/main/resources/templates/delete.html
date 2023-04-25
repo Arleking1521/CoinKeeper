@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<header>
+    <div class="logo" href="">
+        <a href="" class="pic"><img src="img/logo.png" alt="" width="100%"></a>
+        <a href="">CoinKeeper</a>
+    </div>
+    <a href="#">Authorization</a>
+</header>
+<main>
+    <img src="img/back.png"   alt="" srcset="" class="back">
+    <div class="main_content delete">
+            <div class="income one del">
+                <div class="title">
+                    <h2>ДОХОДЫ</h2>
+                </div>
+                <div class="cards">
+                    <div class="card" th:each="inc : ${income}">
+                        <p class="nazv" th:text="${inc.name}"></p>
+                        <button class="img" for="ass" th:text="${inc.images.image}"></button>
+                        <p class="price str" th:text="${inc.balance} + ${inc.forex.sign}"></p>
+                        <p class="price" th:text="${inc.plans}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="income two del">
+                <div class="title money">
+                    <h2>СЧЕТА</h2>
+                </div>
+                <div class="cards">
+                    <div class="card" th:each="acc : ${accounts}">
+                        <p class="nazv" th:text="${acc.name}"></p>
+                        <button class="img sec hov" th:text="${acc.images.image}"></button>
+                        <p class="price str second" th:text="${acc.balance}+ ${acc.forex.sign}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="income three del">
+                <div class="title out">
+                    <h2>РАСХОДЫ</h2>
+                </div>
+                <div class="cards">
+                    <div class="card" th:each="exp : ${expenses}">
+                        <p class="nazv" th:text="${exp.name}"></p>
+                        <button class="img thr" th:text="${exp.images.image}"></button>
+                        <p class="price str third" th:text="${exp.balance}+ ${exp.forex.sign}"></p>
+                        <p class="price" th:unless="${exp.plans == null}" th:text="${exp.plans}"></p>
+                    </div>
+                    <div class="card none" th:if="${expenses.size() == 0}">
+                        <p class="nazv"></p>
+                        <button class="img thr"></button>
+                        <p class="price str third"></p>
+                        <p class="price"></p>
+                    </div>
+                </div>
+        </div>
+    </div>
+</main>
+</body>
+
+</html>
