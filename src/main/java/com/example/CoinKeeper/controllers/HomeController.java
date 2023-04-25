@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Objects;
 
 
 @Controller
@@ -41,6 +42,9 @@ public class HomeController {
             if(income.get(i).getPlans() != null){
                 inc_bal[1] += (income.get(i).getPlans() * income.get(i).getForex().getRatio());
             }
+            if(income.get(i).getBalance() == null){
+                inc_bal [0] = 0;
+            }
             inc_bal[0] += (income.get(i).getBalance() * income.get(i).getForex().getRatio());
         }
         for (int i = 0; i < expenses.size(); i++) {
@@ -63,7 +67,7 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/delete")
+    @GetMapping("/remove")
     public String findAllDeletion(Model model){
         List<Income> income = incomeService.findAll();
         List<Expenses> expenses = expensesService.findAll();
@@ -89,6 +93,9 @@ public class HomeController {
         income.setImages(image);
         Forex forex = forexService.findById(id1);
         income.setForex(forex);
+        if(income.getBalance() == null){
+            income.setBalance(Float.valueOf(0));
+        }
         incomeService.saveIncomes(income);
         return "redirect:/";
     }
@@ -131,10 +138,18 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @GetMapping("income-delete/{id}")
-    public String deletePlayer(@PathVariable("id") Long id){
-        incomeService.deleteById(id);
-        return "redirect:/";
+    @GetMapping("delete/{name}/{id}")
+    public String deleteCard(@PathVariable("id") Long id, @PathVariable("name") String name){
+        if(Objects.equals(name, "income")){
+            incomeService.deleteById(id);
+        }
+        else if(Objects.equals(name, "account")){
+            accountsService.deleteById(id);
+        }
+        else if (Objects.equals(name, "expense")){
+            expensesService.deleteById(id);
+        }
+        return "redirect:/remove";
     }
 
 

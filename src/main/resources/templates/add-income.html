@@ -24,8 +24,6 @@
             <form action="" th:action="@{/add-income}" th:object="${income}" method="post">
                 <span>Источник дохода</span>
                 <input type="text" th:field="*{name}" required>
-                <span>Получено</span>
-                <input type="number" step="0.01" th:field="*{balance}" required>
                 <span>В плане</span>
                 <input type="number" step="0.01" th:field="*{plans}">
                 <span>Валюта</span>

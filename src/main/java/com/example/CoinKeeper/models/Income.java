@@ -20,7 +20,7 @@ public class Income {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "balance")
+    @Column(name = "balance", columnDefinition = "real default 25")
     private Float balance;
 
     @Column(name = "plans")
