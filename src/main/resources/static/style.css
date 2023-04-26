@@ -433,7 +433,41 @@ a{
 }
 
 .his_del{
-    width: 10%;
+    width: 20%;
+    margin: 30px 0px;
+    animation: tab 1s 1;
+}
+
+.his_del a{
+    height: 100%;
+    width: 100%;
+    writing-mode: vertical-rl;
+    font-size: 50px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+}
+
+.his_del a::before{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: indianred;
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+    position: absolute;
+    content: "🗑️";
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.hov:hover::before{
+    opacity: 1;
 }
 
 .del{

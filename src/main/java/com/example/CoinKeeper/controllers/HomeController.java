@@ -328,4 +328,9 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @GetMapping("/delete-history")
+    public String deleteHist(){
+        historyService.deleteAll();
+        return "redirect:/remove";
+    }
 }

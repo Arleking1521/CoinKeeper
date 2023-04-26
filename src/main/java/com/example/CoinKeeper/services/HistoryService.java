@@ -16,6 +16,7 @@ public class HistoryService {
     }
 
     public History findById(Long id){ return historyRepository.getOne(id); }
+    public void deleteAll () { historyRepository.deleteAll(); }
 
     public List<History> findAll(){ return historyRepository.findAll(); }
 
