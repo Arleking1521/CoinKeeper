@@ -39,6 +39,12 @@ public class HomeController {
         List<Expenses> expenses = expensesService.findAll();
         List<Accounts> accounts = accountsService.findAll();
         List<Forex> forex = forexService.findAll();
+        Float gen_inc = (float) 0;
+        Float gen_exp = (float) 0;
+        String[] inc_names = new String[income.size()];
+        Float[] inc_data = new Float[income.size()];
+        String[] exp_names = new String[expenses.size()];
+        Float[] exp_data = new Float[expenses.size()];
         float inc_bal [] = new float[2];
         float exp_bal [] = new float[2];
         float acc_bal [] = new float[1];
@@ -50,17 +56,35 @@ public class HomeController {
                 inc_bal [0] = 0;
             }
             inc_bal[0] += (income.get(i).getBalance() * income.get(i).getForex().getRatio());
+            inc_names[i] = income.get(i).getName();
+            inc_data[i] = income.get(i).getBalance() * income.get(i).getForex().getRatio();
+            gen_inc += income.get(i).getBalance() * income.get(i).getForex().getRatio();
         }
         for (int i = 0; i < expenses.size(); i++) {
             if(expenses.get(i).getPlans() != null){
                 exp_bal[1] += (expenses.get(i).getPlans() * expenses.get(i).getForex().getRatio());
             }
             exp_bal[0] += (expenses.get(i).getBalance() * expenses.get(i).getForex().getRatio());
+            exp_names[i] = expenses.get(i).getName();
+            exp_data[i] = expenses.get(i).getBalance() * expenses.get(i).getForex().getRatio();
+            gen_exp += expenses.get(i).getBalance() * expenses.get(i).getForex().getRatio();
         }
         for (int i = 0; i < accounts.size(); i++) {
             acc_bal[0] += (accounts.get(i).getBalance() * accounts.get(i).getForex().getRatio());
         }
+        Float geni [] = new Float[1];
+        Float gene [] = new Float[1];
+        geni[0] = gen_inc;
+        gene[0] = gen_exp;
+        System.out.println(gen_inc);
+        System.out.println(gen_exp);
         List<History> hs = historyService.findAll();
+        model.addAttribute("gen_exp", gene);
+        model.addAttribute("gen_inc", geni);
+        model.addAttribute("exp_data", exp_data);
+        model.addAttribute("exp", exp_names);
+        model.addAttribute("ina_data", inc_data);
+        model.addAttribute("ina", inc_names);
         model.addAttribute("hs", hs);
         model.addAttribute("history", history);
         model.addAttribute("forex", forex);

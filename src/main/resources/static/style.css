@@ -561,3 +561,19 @@ a{
     0%{opacity: 0; transform: translate(0px, -100vh);}
     50%{opacity: 1; transform: translate(0px);}
 }
+
+.stat{
+    display: flex;
+    flex-direction: row;
+}
+
+.stat div{
+    width: 50%;
+    margin: 50px;
+}
+
+.stat2{
+    width: 80%;
+    margin: auto;
+}
+
