@@ -512,6 +512,36 @@ a{
     filter: brightness(0.5);
 }
 
+.inputs{
+    width: 80%;
+    height: 50px;
+    border-radius: 25px;
+    font-size: 20px;
+}
+.iconSelUpd{
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    font-size: 20px;
+    margin-top: 10px;
+}
+.planUpd{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.iconUpd{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.updBtn{
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+}
 @keyframes tab {
     0%{opacity: 0; transform: translate(1000px);}
     30%{opacity: 1; transform: translate(0px);}
