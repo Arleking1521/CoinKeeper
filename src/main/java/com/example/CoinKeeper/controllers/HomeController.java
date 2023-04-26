@@ -263,4 +263,45 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @GetMapping("/update-accounts/{id}")
+    public String updateAccForm(@PathVariable("id") Long id, Model model){
+        List<Images> images = imagesService.findAll();
+        model.addAttribute("image", images);
+        List<Forex> forex = forexService.findAll();
+        model.addAttribute("forex", forex);
+        Accounts accounts = accountsService.findById(id);
+        model.addAttribute("accounts", accounts);
+        return "update-accounts";
+    }
+
+    @PostMapping("/update-accounts")
+    public String updateAcc(Accounts accounts, @RequestParam(name = "img_id")Long id, @RequestParam(name = "cur_id")Long id1){
+        Images image = imagesService.findById(id);
+        accounts.setImages(image);
+        Forex forex = forexService.findById(id1);
+        accounts.setForex(forex);
+        accountsService.saveAccounts(accounts);
+        return "redirect:/";
+    }
+    @GetMapping("/update-expenses/{id}")
+    public String updateExpForm(@PathVariable("id") Long id, Model model){
+        List<Images> images = imagesService.findAll();
+        model.addAttribute("image", images);
+        List<Forex> forex = forexService.findAll();
+        model.addAttribute("forex", forex);
+        Expenses expenses = expensesService.findById(id);
+        model.addAttribute("expenses", expenses);
+        return "update-expenses";
+    }
+
+    @PostMapping("/update-expenses")
+    public String updateExpenses(Expenses expenses, @RequestParam(name = "img_id")Long id, @RequestParam(name = "cur_id")Long id1){
+        Images image = imagesService.findById(id);
+        expenses.setImages(image);
+        Forex forex = forexService.findById(id1);
+        expenses.setForex(forex);
+        expensesService.saveExpenses(expenses);
+        return "redirect:/";
+    }
+
 }
