@@ -73,7 +73,7 @@
                     <div class="card" th:each="inc : ${income}">
                         <p class="nazv" th:text="${inc.name}"></p>
 
-                            <a class="img" th:href="@{update-income/{id}(id=${inc.id})}" th:text="${inc.images.image}" ></a>
+                            <a class="img"  th:href="@{update-income/{id}(id=${inc.id})}" th:text="${inc.images.image}" ></a>
 
                         <p class="price str" th:text="${inc.balance} + ${inc.forex.sign}"></p>
                         <p class="price" th:text="${inc.plans}"></p>
