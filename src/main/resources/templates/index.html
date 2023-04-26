@@ -25,26 +25,26 @@
         <form action="" method="post" th:object="${history}" th:action="@{/transfer}">
                 <span class="form_el">
                     <span>ИЗ</span>
-                    <select id="" class="label" name="from_id">
+                    <select id="" class="label" name="from_id" required>
                         <option th:each="in : ${income}" th:text="${in.name}" th:value="'1'+${in.id}">
                         <option th:each="acc : ${accounts}" th:text="${acc.name}" th:value="'2'+${acc.id}">
                     </select>
                 </span>
             <span class="form_el">
                     <span>В</span>
-                    <select class="label" name="to_id">
+                    <select class="label" name="to_id" required>
                         <option th:each="acc : ${accounts}" th:text="${acc.name}" th:value="'2'+${acc.id}">
                         <option th:each="ex : ${expenses}" th:text="${ex.name}" th:value="'3'+${ex.id}">
                     </select>
                 </span>
-            <span class="summa">
-                    <input type="number" step="0.01" placeholder="Сумма" th:field="*{sum}">
-                    <select name="forex">
+            <span class="summa" >
+                    <input type="number" step="0.01" placeholder="Сумма" th:field="*{sum}" required>
+                    <select name="forex" required>
                         <option th:each="frx : ${forex}" th:value="${frx.id}" th:text="${frx.sign}"></option>
                     </select>
                 </span>
             <span class="form_el">
-                    <input type="date" placeholder="ДАТА" th:field="*{date}">
+                    <input type="date" placeholder="ДАТА" th:field="*{date}" required>
                 </span>
             <span class="form_el">
                     <input type="text" placeholder="Комментарий" th:field="*{comment}">
