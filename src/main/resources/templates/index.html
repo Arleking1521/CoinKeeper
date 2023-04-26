@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -21,35 +22,34 @@
 <main>
     <img src="img/back.png"   alt="" srcset="" class="back">
     <div class="form">
-        <form action="" method="post">
+        <form action="" method="post" th:object="${history}" th:action="@{/transfer}">
                 <span class="form_el">
                     <span>ИЗ</span>
-                    <select name="" id="" class="label">
-                        <option value="">Кошелёк</option>
-                        <option value="">Карта</option>
+                    <select id="" class="label" name="from_id">
+                        <option th:each="in : ${income}" th:text="${in.name}" th:value="'1'+${in.id}">
+                        <option th:each="acc : ${accounts}" th:text="${acc.name}" th:value="'2'+${acc.id}">
                     </select>
                 </span>
             <span class="form_el">
                     <span>В</span>
-                    <select name="" class="label">
-                        <option value="">Кошелёк</option>
-                        <option value="">Карта</option>
+                    <select class="label" name="to_id">
+                        <option th:each="acc : ${accounts}" th:text="${acc.name}" th:value="'2'+${acc.id}">
+                        <option th:each="ex : ${expenses}" th:text="${ex.name}" th:value="'3'+${ex.id}">
                     </select>
                 </span>
             <span class="summa">
-                    <input type="number" placeholder="Сумма">
-                    <select name="">
-                        <option value="">Рублей</option>
-                        <option value="">Тенге</option>
+                    <input type="number" step="0.01" placeholder="Сумма" th:field="*{sum}">
+                    <select name="forex">
+                        <option th:each="frx : ${forex}" th:value="${frx.id}" th:text="${frx.sign}"></option>
                     </select>
                 </span>
             <span class="form_el">
-                    <input type="date" placeholder="ДАТА">
+                    <input type="date" placeholder="ДАТА" th:field="*{date}">
                 </span>
             <span class="form_el">
-                    <input type="text" placeholder="Комментарий">
+                    <input type="text" placeholder="Комментарий" th:field="*{comment}">
                 </span>
-            <button>ПЕРЕВЕСТИ</button>
+            <button type="submit">ПЕРЕВЕСТИ</button>
         </form>
     </div>
     <a class="del_pg" th:href="@{/remove}">🗑️</a>

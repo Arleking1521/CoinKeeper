@@ -485,7 +485,7 @@ form button:hover{
     width: 100px;
     display: flex;
     justify-content: center;
-    background: linear-gradient(0.25turn, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));;
+    background: linear-gradient(0.25turn, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));;
     writing-mode: vertical-rl;
     align-items: end;
     font-size: 50px;

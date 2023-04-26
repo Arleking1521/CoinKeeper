@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,20 +22,25 @@ public class HomeController {
     private final AccountsService accountsService;
     private final ImagesService imagesService;
     private final ForexService forexService;
+    private final HistoryService historyService;
 
-    public HomeController(IncomeService incomeService, ExpensesService expensesService, AccountsService accountsService, ImagesService imagesService, ForexService forexService) {
+    public HomeController(IncomeService incomeService, ExpensesService expensesService, AccountsService accountsService, ImagesService imagesService, ForexService forexService, HistoryService historyService) {
         this.incomeService = incomeService;
         this.expensesService = expensesService;
         this.accountsService = accountsService;
         this.imagesService = imagesService;
         this.forexService = forexService;
+        this.historyService = historyService;
     }
 
     @GetMapping("/")
-    public String findAll(Model model){
+    public String findAll(Model model, History history){
         List<Income> income = incomeService.findAll();
         List<Expenses> expenses = expensesService.findAll();
         List<Accounts> accounts = accountsService.findAll();
+        List<Forex> forex = forexService.findAll();
+        List<String> from = new ArrayList<>();
+        List<String> to = new ArrayList<>();
         float inc_bal [] = new float[2];
         float exp_bal [] = new float[2];
         float acc_bal [] = new float[1];
@@ -46,16 +52,24 @@ public class HomeController {
                 inc_bal [0] = 0;
             }
             inc_bal[0] += (income.get(i).getBalance() * income.get(i).getForex().getRatio());
+            from.add(income.get(i).getName());
         }
         for (int i = 0; i < expenses.size(); i++) {
             if(expenses.get(i).getPlans() != null){
                 exp_bal[1] += (expenses.get(i).getPlans() * expenses.get(i).getForex().getRatio());
             }
             exp_bal[0] += (expenses.get(i).getBalance() * expenses.get(i).getForex().getRatio());
+            to.add(expenses.get(i).getName());
         }
         for (int i = 0; i < accounts.size(); i++) {
             acc_bal[0] += (accounts.get(i).getBalance() * accounts.get(i).getForex().getRatio());
+            from.add(accounts.get(i).getName());
+            to.add(accounts.get(i).getName());
         }
+        model.addAttribute("history", history);
+        model.addAttribute("forex", forex);
+        model.addAttribute("to", to);
+        model.addAttribute("from", from);
         model.addAttribute("inc_bal1", inc_bal[0]);
         model.addAttribute("inc_bal2", inc_bal[1]);
         model.addAttribute("exp_bal1", exp_bal[0]);
@@ -152,6 +166,43 @@ public class HomeController {
         return "redirect:/remove";
     }
 
+    @PostMapping("/transfer")
+    public String transferCash(History history, @RequestParam(name="from_id")String id, @RequestParam(name="to_id")String id1, @RequestParam(name = "forex") Long id2){
+        Long from_id = Long.valueOf(id.substring(1));
+        Long to_id = Long.valueOf(id1.substring(1));
+        char ident_from = id.charAt(0);
+        char ident_to = id1.charAt(0);
+        Float temp;
+        if(ident_from == '1'){
+            Income income = incomeService.findById(from_id);
+            temp = income.getBalance() * income.getForex().getRatio();
+            income.setBalance((history.getSum()*history.getForex().getRatio() + temp) / income.getForex().getRatio());
+            history.setFrom(income.getName());
+            incomeService.saveIncomes(income);
+        } else if (ident_from == '2') {
+            Accounts accounts = accountsService.findById(to_id);
+            temp = accounts.getBalance() * accounts.getForex().getRatio();
+            accounts.setBalance((temp - (history.getSum()*history.getForex().getRatio())) / accounts.getForex().getRatio());
+            history.setTo(accounts.getName());
+            accountsService.saveAccounts(accounts);
+        }
+        if(ident_to == '2'){
+            Accounts accounts = accountsService.findById(to_id);
+            temp = accounts.getBalance() * accounts.getForex().getRatio();
+            accounts.setBalance((history.getSum()*history.getForex().getRatio()+temp) / accounts.getForex().getRatio());
+            history.setTo(accounts.getName());
+            accountsService.saveAccounts(accounts);
+        } else if (ident_to == '3') {
+            Expenses expenses = expensesService.findById(to_id);
+            temp = expenses.getBalance() * expenses.getForex().getRatio();
+            expenses.setBalance((history.getSum()*history.getForex().getRatio()+temp) / expenses.getForex().getRatio());
+            history.setTo(expenses.getName());
+            expensesService.saveExpenses(expenses);
+        }
+        historyService.saveHistory(history);
+        System.out.println("from_id" + from_id + " to_id" + to_id + " ident_from" + ident_from + " ident_to" + ident_to);
+        return "redirect:/";
+    }
 
     @GetMapping("/income-update/{id}")
     public String updateCarForm(@PathVariable("id") Long id, Model model){
