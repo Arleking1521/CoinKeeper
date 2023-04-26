@@ -144,6 +144,79 @@
             </table>
         </div>
     </div>
+    <div class="stat">
+        <div><canvas id="myChart"></canvas></div>
+        <div><canvas id="expChart"></canvas></div>
+    </div>
+    <div class="stat2"><canvas id="general"></canvas></div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script th:inline="javascript">
+        const ctx = document.getElementById('myChart');
+        const cty = document.getElementById('expChart')
+        const ctz = document.getElementById('general')
+
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: [[${ina}]],
+                datasets: [{
+                    label: ' tg',
+                    data: [[${ina_data}]],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Доходы'
+                    }
+                }
+            }
+        });
+        new Chart(cty, {
+            type: 'pie',
+            data: {
+                labels: [[${exp}]],
+                datasets: [{
+                    label: ' tg',
+                    data: [[${exp_data}]],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Расходы'
+                    }
+                }
+            }
+        });
+        new Chart(ctz, {
+            type: 'bar',
+            data: {
+                labels: [' '],
+                datasets: [{
+                    data: [[${gen_inc}]],
+                    label: 'Доходы'
+                },
+                    {
+                        data: [[${gen_exp}]],
+                        label: 'Расходы'
+                    }]
+            },
+            options: {
+                indexAxis: 'y'
+            },
+            plugins: {
+                legend: {
+                    display: false,
+                }
+            }
+        });
+    </script>
+
 </main>
 </body>
 
