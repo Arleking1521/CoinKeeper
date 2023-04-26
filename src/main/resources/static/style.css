@@ -222,14 +222,6 @@ form button:hover{
     font-size: 20px;
 }
 
-.update{
-    cursor: pointer;
-    display:block;
-    margin-left: 90%;
-    width: 10px;
-    z-index: 9;
-}
-
 .img:hover{
     filter: brightness(110%);
     box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.4);
