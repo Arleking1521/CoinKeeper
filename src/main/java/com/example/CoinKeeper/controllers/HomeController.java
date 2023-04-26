@@ -201,7 +201,7 @@ public class HomeController {
             history.setFrom(income.getName());
             incomeService.saveIncomes(income);
         } else if (ident_from == '2') {
-            Accounts accounts = accountsService.findById(to_id);
+            Accounts accounts = accountsService.findById(from_id);
             temp = accounts.getBalance() * accounts.getForex().getRatio();
             accounts.setBalance((temp - (history.getSum() * history.getForex().getRatio())) / accounts.getForex().getRatio());
             history.setTo(accounts.getName());

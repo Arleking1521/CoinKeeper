@@ -44,6 +44,12 @@ main{
     z-index: 2;
 }
 
+.main_del{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 form{
     width: 100%;
     display: flex;
@@ -222,7 +228,9 @@ a{
     border: none;
     transition: 0.3s;
     font-size: 20px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .img:hover{
@@ -421,6 +429,11 @@ a{
 .delete{
     flex-direction: column;
     align-items: center;
+    width: 80%;
+}
+
+.his_del{
+    width: 10%;
 }
 
 .del{
