@@ -39,8 +39,6 @@ public class HomeController {
         List<Expenses> expenses = expensesService.findAll();
         List<Accounts> accounts = accountsService.findAll();
         List<Forex> forex = forexService.findAll();
-        List<String> from = new ArrayList<>();
-        List<String> to = new ArrayList<>();
         float inc_bal [] = new float[2];
         float exp_bal [] = new float[2];
         float acc_bal [] = new float[1];
@@ -52,24 +50,20 @@ public class HomeController {
                 inc_bal [0] = 0;
             }
             inc_bal[0] += (income.get(i).getBalance() * income.get(i).getForex().getRatio());
-            from.add(income.get(i).getName());
         }
         for (int i = 0; i < expenses.size(); i++) {
             if(expenses.get(i).getPlans() != null){
                 exp_bal[1] += (expenses.get(i).getPlans() * expenses.get(i).getForex().getRatio());
             }
             exp_bal[0] += (expenses.get(i).getBalance() * expenses.get(i).getForex().getRatio());
-            to.add(expenses.get(i).getName());
         }
         for (int i = 0; i < accounts.size(); i++) {
             acc_bal[0] += (accounts.get(i).getBalance() * accounts.get(i).getForex().getRatio());
-            from.add(accounts.get(i).getName());
-            to.add(accounts.get(i).getName());
         }
+        List<History> hs = historyService.findAll();
+        model.addAttribute("hs", hs);
         model.addAttribute("history", history);
         model.addAttribute("forex", forex);
-        model.addAttribute("to", to);
-        model.addAttribute("from", from);
         model.addAttribute("inc_bal1", inc_bal[0]);
         model.addAttribute("inc_bal2", inc_bal[1]);
         model.addAttribute("exp_bal1", exp_bal[0]);
@@ -148,6 +142,9 @@ public class HomeController {
         expenses.setImages(image);
         Forex forex = forexService.findById(id1);
         expenses.setForex(forex);
+        if(expenses.getBalance() == null){
+            expenses.setBalance((float) 0);
+        }
         expensesService.saveExpenses(expenses);
         return "redirect:/";
     }
@@ -199,8 +196,50 @@ public class HomeController {
             history.setTo(expenses.getName());
             expensesService.saveExpenses(expenses);
         }
+        String year = history.getDate().substring(0, 4);
+        String month = history.getDate().substring(5, 7);
+        Integer day = Integer.valueOf(history.getDate().substring(8));
+        switch (month) {
+            case "01":
+                month = "Января";
+                break;
+            case "02":
+                month = "Февраля";
+                break;
+            case "03":
+                month = "Марта";
+                break;
+            case "04":
+                month = "Апреля";
+                break;
+            case "05":
+                month = "Мая";
+                break;
+            case "06":
+                month = "Июня";
+                break;
+            case "07":
+                month = "Июля";
+                break;
+            case "08":
+                month = "Августа";
+                break;
+            case "09":
+                month = "Сентября";
+                break;
+            case "10":
+                month = "Октября";
+                break;
+            case "11":
+                month = "Ноября";
+                break;
+            case "12":
+                month = "Декабря";
+                break;
+        }
+        String date = day + " " + month + ", " + year;
+        history.setDate(date);
         historyService.saveHistory(history);
-        System.out.println("from_id" + from_id + " to_id" + to_id + " ident_from" + ident_from + " ident_to" + ident_to);
         return "redirect:/";
     }
 

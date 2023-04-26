@@ -130,21 +130,12 @@
             </div>
         </div>
         <div class="history">
+            <h1>История Переводов</h1>
             <table class="table">
-                <tr>
-                    <td><h1>12 Апреля, 2023</h1></td>
-                </tr>
-                <tr>
-                    <td class="subtab"><div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet nostrum praesentium nihil quisquam velit, optio magnam quae laboriosam, eaque iste vitae est rerum quas, alias necessitatibus minima adipisci. Voluptate, eligendi!</div></td>
-                </tr>
-                <tr>
-                    <td class="subtab"><div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam nobis molestias, error officiis voluptatem harum nulla iste explicabo, magnam quae soluta minima, ut delectus vel id mollitia neque porro quo.</div></td>
-                </tr>
-                <tr>
-                    <td><h1>11 Апреля, 2023</h1></td>
-                </tr>
-                <tr>
-                    <td class="subtab"><div>Пополение</div></td>
+                <tr th:each="hs : ${hs}">
+                    <td>
+                        <div class="subtab"><div><h4 th:text="${hs.date}" class="date"></h4><p th:text="'Перевод из '+ ${hs.from} + ' В ' + ${hs.to} + '. Сумма: ' + ${hs.sum} + ${hs.forex.sign}"></p></div></div>
+                    </td>
                 </tr>
             </table>
         </div>

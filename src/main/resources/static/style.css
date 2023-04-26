@@ -188,9 +188,18 @@ form button:hover{
 .history{
     width: 50%;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
 
+.history h1{
+    align-self: flex-start;
+    margin-left: 5%;
+}
+
+.date{
+    text-decoration: underline;
 }
 
 .income{

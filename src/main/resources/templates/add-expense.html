@@ -19,13 +19,14 @@
         <a href="#">Authorization</a>
     </header>
     <main>
+        <a class="bac" th:href="@{/}">BACK</a>
         <img src="img/back.png" alt="" srcset="" class="back">
         <div>
             <form action="" th:action="@{/add-expense}" th:object="${expenses}" method="post">
                 <span>Расходы</span>
                 <input type="text" th:field="*{name}" required>
                 <span>Сумма</span>
-                <input type="number" step="0.01" th:field="*{balance}" required>
+                <input type="number" step="0.01" th:field="*{balance}">
                 <span>В плане</span>
                 <input type="number" step="0.01" th:field="*{plans}">
                 <span>Валюта</span>
