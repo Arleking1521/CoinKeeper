@@ -204,17 +204,25 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @GetMapping("/income-update/{id}")
-    public String updateCarForm(@PathVariable("id") Long id, Model model){
-        Income player = incomeService.findById(id);
-        model.addAttribute("player", player);
-        return "income-update";
+    @GetMapping("/update-income/{id}")
+    public String updateIncomeForm(@PathVariable("id") Long id, Model model){
+        List<Images> images = imagesService.findAll();
+        model.addAttribute("image", images);
+        List<Forex> forex = forexService.findAll();
+        model.addAttribute("forex", forex);
+        Income income = incomeService.findById(id);
+        model.addAttribute("income", income);
+        return "update-income";
     }
 
-    @PostMapping("/player-update")
-    public String updatePlayer(Income income, @RequestParam(name = "band_id")Long id){
+    @PostMapping("/update-income")
+    public String updateIncome(Income income, @RequestParam(name = "img_id")Long id, @RequestParam(name = "cur_id")Long id1){
+        Images image = imagesService.findById(id);
+        income.setImages(image);
+        Forex forex = forexService.findById(id1);
+        income.setForex(forex);
         incomeService.saveIncomes(income);
-        return "redirect:/players";
+        return "redirect:/";
     }
 
 }
