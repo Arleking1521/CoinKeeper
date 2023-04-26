@@ -73,8 +73,7 @@
                     <div class="card" th:each="inc : ${income}">
                         <p class="nazv" th:text="${inc.name}"></p>
 
-                            <img src="img/update-icon.png" class="update" th:href="@{update-income/{id}(id=${inc.id})}">
-                            <button class="img" for="ass" th:text="${inc.images.image}"></button>
+                            <a class="img"  th:href="@{update-income/{id}(id=${inc.id})}" th:text="${inc.images.image}" ></a>
 
                         <p class="price str" th:text="${inc.balance} + ${inc.forex.sign}"></p>
                         <p class="price" th:text="${inc.plans}"></p>
@@ -98,7 +97,7 @@
                 <div class="cards">
                     <div class="card" th:each="acc : ${accounts}">
                         <p class="nazv" th:text="${acc.name}"></p>
-                        <button class="img sec" th:text="${acc.images.image}"></button>
+                        <a class="img sec"  th:href="@{update-accounts/{id}(id=${acc.id})}" th:text="${acc.images.image}" ></a>
                         <p class="price str second" th:text="${acc.balance}+ ${acc.forex.sign}"></p>
                     </div>
                     <a class="card more" th:href="@{add-account}">
@@ -123,7 +122,7 @@
                 <div class="cards">
                     <div class="card" th:each="exp : ${expenses}">
                         <p class="nazv" th:text="${exp.name}"></p>
-                        <button class="img thr" th:text="${exp.images.image}"></button>
+                        <a class="img thr" role="button" th:href="@{update-expenses/{id}(id=${exp.id})}" th:text="${exp.images.image}" ></a>
                         <p class="price str third" th:text="${exp.balance}+ ${exp.forex.sign}"></p>
                         <p class="price" th:unless="${exp.plans == null}" th:text="${exp.plans}"></p>
                     </div>

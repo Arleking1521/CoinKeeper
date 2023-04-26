@@ -23,16 +23,14 @@
         <a class="bac" th:href="@{/}">BACK</a>
         <img src="/img/back.png" alt="" srcset="" class="back">
         <div>
-            <form action="" th:action="@{/update-income}" th:object="${income}" method="post">
+            <form action="" th:action="@{/update-accounts}" th:object="${accounts}" method="post">
                 <input type="hidden" th:field="*{id}">
                 <input type="hidden" th:field="*{balance}">
                 <span>Источник дохода</span>
                 <input type="text" th:field="*{name}" required>
-                <span>В плане</span>
-                <input type="number" step="0.01" th:field="*{plans}">
-
-                <p th:each="inc : ${income}" th:text="${inc.forex.sign}"></p>
-
+                <span>Баланс</span>
+                <input type="number" step="0.01" th:field="*{balance}">
+                <p th:each="acc : ${accounts}" th:text="${acc.forex.sign}"></p>
                 <span>Иконка</span>
                 <select name = "img_id">
                     <option th:each="img : ${image}" th:text="${img.image}" th:value="${img.id}"></option>

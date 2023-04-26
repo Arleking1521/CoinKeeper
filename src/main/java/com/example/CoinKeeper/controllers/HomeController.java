@@ -188,35 +188,35 @@ public class HomeController {
     }
 
     @PostMapping("/transfer")
-    public String transferCash(History history, @RequestParam(name="from_id")String id, @RequestParam(name="to_id")String id1, @RequestParam(name = "forex") Long id2){
+    public String transferCash(History history, @RequestParam(name="from_id")String id, @RequestParam(name="to_id")String id1, @RequestParam(name = "forex") Long id2) {
         Long from_id = Long.valueOf(id.substring(1));
         Long to_id = Long.valueOf(id1.substring(1));
         char ident_from = id.charAt(0);
         char ident_to = id1.charAt(0);
         Float temp;
-        if(ident_from == '1'){
+        if (ident_from == '1') {
             Income income = incomeService.findById(from_id);
             temp = income.getBalance() * income.getForex().getRatio();
-            income.setBalance((history.getSum()*history.getForex().getRatio() + temp) / income.getForex().getRatio());
+            income.setBalance((history.getSum() * history.getForex().getRatio() + temp) / income.getForex().getRatio());
             history.setFrom(income.getName());
             incomeService.saveIncomes(income);
         } else if (ident_from == '2') {
             Accounts accounts = accountsService.findById(to_id);
             temp = accounts.getBalance() * accounts.getForex().getRatio();
-            accounts.setBalance((temp - (history.getSum()*history.getForex().getRatio())) / accounts.getForex().getRatio());
+            accounts.setBalance((temp - (history.getSum() * history.getForex().getRatio())) / accounts.getForex().getRatio());
             history.setTo(accounts.getName());
             accountsService.saveAccounts(accounts);
         }
-        if(ident_to == '2'){
+        if (ident_to == '2') {
             Accounts accounts = accountsService.findById(to_id);
             temp = accounts.getBalance() * accounts.getForex().getRatio();
-            accounts.setBalance((history.getSum()*history.getForex().getRatio()+temp) / accounts.getForex().getRatio());
+            accounts.setBalance((history.getSum() * history.getForex().getRatio() + temp) / accounts.getForex().getRatio());
             history.setTo(accounts.getName());
             accountsService.saveAccounts(accounts);
         } else if (ident_to == '3') {
             Expenses expenses = expensesService.findById(to_id);
             temp = expenses.getBalance() * expenses.getForex().getRatio();
-            expenses.setBalance((history.getSum()*history.getForex().getRatio()+temp) / expenses.getForex().getRatio());
+            expenses.setBalance((history.getSum() * history.getForex().getRatio() + temp) / expenses.getForex().getRatio());
             history.setTo(expenses.getName());
             expensesService.saveExpenses(expenses);
         }
@@ -266,7 +266,6 @@ public class HomeController {
         historyService.saveHistory(history);
         return "redirect:/";
     }
-
     @GetMapping("/update-income/{id}")
     public String updateIncomeForm(@PathVariable("id") Long id, Model model){
         List<Images> images = imagesService.findAll();
@@ -285,6 +284,47 @@ public class HomeController {
         Forex forex = forexService.findById(id1);
         income.setForex(forex);
         incomeService.saveIncomes(income);
+        return "redirect:/";
+    }
+
+    @GetMapping("/update-accounts/{id}")
+    public String updateAccForm(@PathVariable("id") Long id, Model model){
+        List<Images> images = imagesService.findAll();
+        model.addAttribute("image", images);
+        List<Forex> forex = forexService.findAll();
+        model.addAttribute("forex", forex);
+        Accounts accounts = accountsService.findById(id);
+        model.addAttribute("accounts", accounts);
+        return "update-accounts";
+    }
+
+    @PostMapping("/update-accounts")
+    public String updateAcc(Accounts accounts, @RequestParam(name = "img_id")Long id, @RequestParam(name = "cur_id")Long id1){
+        Images image = imagesService.findById(id);
+        accounts.setImages(image);
+        Forex forex = forexService.findById(id1);
+        accounts.setForex(forex);
+        accountsService.saveAccounts(accounts);
+        return "redirect:/";
+    }
+    @GetMapping("/update-expenses/{id}")
+    public String updateExpForm(@PathVariable("id") Long id, Model model){
+        List<Images> images = imagesService.findAll();
+        model.addAttribute("image", images);
+        List<Forex> forex = forexService.findAll();
+        model.addAttribute("forex", forex);
+        Expenses expenses = expensesService.findById(id);
+        model.addAttribute("expenses", expenses);
+        return "update-expenses";
+    }
+
+    @PostMapping("/update-expenses")
+    public String updateExpenses(Expenses expenses, @RequestParam(name = "img_id")Long id, @RequestParam(name = "cur_id")Long id1){
+        Images image = imagesService.findById(id);
+        expenses.setImages(image);
+        Forex forex = forexService.findById(id1);
+        expenses.setForex(forex);
+        expensesService.saveExpenses(expenses);
         return "redirect:/";
     }
 
