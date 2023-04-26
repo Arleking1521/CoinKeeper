@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Doc</title>
 </head>
-
+</style>
 <body>
     <header>
         <div class="logo" href="">
-            <a href="" class="pic"><img src="img/logo.png" alt="" width="100%"></a>
+            <a href="" class="pic"><img src="/img/logo.png" alt="" width="100%"></a>
             <a href="">CoinKeeper</a>
         </div>
         <a href="#">Authorization</a>
     </header>
     <main>
-        <img src="img/back.png" alt="" srcset="" class="back">
+        <img src="/img/back.png" alt="" srcset="" class="back">
         <div>
             <form action="" th:action="@{/update-income}" th:object="${income}" method="post">
                 <input type="hidden" th:field="*{id}">
@@ -41,5 +42,4 @@
         </div>
     </main>
 </body>
-
 </html>
