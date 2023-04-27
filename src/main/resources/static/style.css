@@ -204,9 +204,6 @@ form button:hover{
     margin-left: 5%;
 }
 
-.date{
-    text-decoration: underline;
-}
 
 .income{
     background-color: white;
@@ -251,7 +248,9 @@ a{
     padding: 0px 30px 0px 30px;
     transition: 0.3s;;
 }
-
+.alig{
+    align-self: end;
+}
 .info{
     display: flex;
     flex-direction: row;
@@ -424,6 +423,13 @@ a{
     background: white;
     padding: 20px 40px;
     margin: 5px 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.subtab div p{
+    margin: 2px 0px;
+    font-size: 18px;
 }
 
 .delete{
@@ -448,22 +454,6 @@ a{
     align-items: center;
     justify-content: center;
     border-radius: 20px;
-}
-
-.his_del a::before{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: indianred;
-    height: 100%;
-    width: 100%;
-    border-radius: 20px;
-    position: absolute;
-    content: "🗑️";
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transition: 0.3s;
 }
 
 .hov:hover::before{
@@ -530,10 +520,6 @@ a{
     left: 0;
     opacity: 0;
     transition: 0.3s;
-}
-
-.hov:hover::before{
-    opacity: 1;
 }
 
 .bac{

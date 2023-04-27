@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,4 +35,7 @@ public class History {
 
     @Column(name = "comm")
     private String comment;
+
+    @Column(name = "dsort")
+    private Date dsort;
 }

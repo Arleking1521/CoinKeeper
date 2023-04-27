@@ -79,6 +79,16 @@ public class HomeController {
         System.out.println(gen_inc);
         System.out.println(gen_exp);
         List<History> hs = historyService.findAll();
+        String tempDate = hs.get(0).getDate();
+        for(int i = 1; i<hs.size(); i++){
+            if(Objects.equals(tempDate, hs.get(i).getDate())){
+                hs.get(i).setDate(null);
+                System.out.println("HUY");
+            }
+            else {
+                tempDate = hs.get(i).getDate();
+            }
+        }
         model.addAttribute("gen_exp", gene);
         model.addAttribute("gen_inc", geni);
         model.addAttribute("exp_data", exp_data);
@@ -204,7 +214,7 @@ public class HomeController {
             Accounts accounts = accountsService.findById(from_id);
             temp = accounts.getBalance() * accounts.getForex().getRatio();
             accounts.setBalance((temp - (history.getSum() * history.getForex().getRatio())) / accounts.getForex().getRatio());
-            history.setTo(accounts.getName());
+            history.setFrom(accounts.getName());
             accountsService.saveAccounts(accounts);
         }
         if (ident_to == '2') {
@@ -220,9 +230,10 @@ public class HomeController {
             history.setTo(expenses.getName());
             expensesService.saveExpenses(expenses);
         }
-        String year = history.getDate().substring(0, 4);
-        String month = history.getDate().substring(5, 7);
-        Integer day = Integer.valueOf(history.getDate().substring(8));
+        String date_convert = String.valueOf(history.getDsort());
+        String year = date_convert.substring(0, 4);
+        String month = date_convert.substring(5, 7);
+        Integer day = Integer.valueOf(date_convert.substring(8));
         switch (month) {
             case "01":
                 month = "Января";

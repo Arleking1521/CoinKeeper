@@ -44,7 +44,7 @@
                     </select>
                 </span>
             <span class="form_el">
-                    <input type="date" placeholder="ДАТА" th:field="*{date}" required>
+                    <input type="date" placeholder="ДАТА" th:field="*{dsort}" required>
                 </span>
             <span class="form_el">
                     <input type="text" placeholder="Комментарий" th:field="*{comment}">
@@ -133,11 +133,18 @@
             </div>
         </div>
         <div class="history">
-            <h1>История Переводов</h1>
             <table class="table">
                 <tr th:each="hs : ${hs}">
                     <td>
-                        <div class="subtab"><div><h4 th:text="${hs.date}" class="date"></h4><p th:text="'Перевод из '+ ${hs.from} + ' В ' + ${hs.to} + '. Сумма: ' + ${hs.sum} + ${hs.forex.sign}"></p></div></div>
+                        <h2 th:if="${hs.date != null}" th:text="${hs.date}" class="date"></h2>
+                        <div class="subtab">
+                            <div>
+                                <p>Перевод из <b th:text="${hs.from}"></b> В  <b th:text="${hs.to}"></b>.</p>
+                                <b class="alig" th:text=" 'Сумма: ' + ${hs.sum} + ${hs.forex.sign}"></b>
+                                <br>
+                                <i class="alig" th:unless="${hs.comment == null}" th:text="${hs.comment}"></i>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </table>
