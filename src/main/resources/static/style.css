@@ -450,26 +450,6 @@ a{
     border-radius: 20px;
 }
 
-.his_del a::before{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: indianred;
-    height: 100%;
-    width: 100%;
-    border-radius: 20px;
-    position: absolute;
-    content: "🗑️";
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transition: 0.3s;
-}
-
-.hov:hover::before{
-    opacity: 1;
-}
-
 .del{
     width: 50%;
 }
