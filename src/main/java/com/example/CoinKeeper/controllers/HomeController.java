@@ -79,7 +79,10 @@ public class HomeController {
         System.out.println(gen_inc);
         System.out.println(gen_exp);
         List<History> hs = historyService.findAll();
-        String tempDate = hs.get(0).getDate();
+        String tempDate = null;
+        if(hs.size() > 0){
+            tempDate = hs.get(0).getDate();
+        }
         for(int i = 1; i<hs.size(); i++){
             if(Objects.equals(tempDate, hs.get(i).getDate())){
                 hs.get(i).setDate(null);
